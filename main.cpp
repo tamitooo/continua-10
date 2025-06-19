@@ -2,7 +2,8 @@
 #include <vector>
 #include <chrono>
 #include <ctime>
-#include <unistd.h>
+#include "smatching.h"
+#include "suffixtree.h"
 
 using namespace std;
 
@@ -18,12 +19,9 @@ string generarTexto(size_t N){
 vector<int> testInocente(string Texto, string Patron)
 {    
     auto start = std::chrono::steady_clock::now();
-
-    //execute the algorithm
-    //TODO
-    vector<int> result;
-
+    vector<int> result = execInocente(Texto, Patron);
     auto end = std::chrono::steady_clock::now();
+
     //show the elapsed time
     cout << "Inocente: elapsed time in milliseconds: "
         << chrono::duration_cast<chrono::microseconds>(end - start).count()
@@ -34,11 +32,7 @@ vector<int> testInocente(string Texto, string Patron)
 vector<int> testBoyerMoore(string Texto, string Patron)
 {    
     auto start = std::chrono::steady_clock::now();
-
-    //execute the algorithm
-    //TODO
-    vector<int> result;
-
+    vector<int> result = execBoyerMoore(Texto, Patron);
     auto end = std::chrono::steady_clock::now();
     //show the elapsed time
     cout << "BoyerMoore: elapsed time in milliseconds: "
@@ -49,13 +43,12 @@ vector<int> testBoyerMoore(string Texto, string Patron)
 
 vector<int> testSuffixTree(string Texto, string Patron)
 {    
+    Nodo* raiz = construirArbol(Texto);
+
     auto start = std::chrono::steady_clock::now();
-
-    //execute the algorithm
-    //TODO
-    vector<int> result;
-
+    vector<int> result = buscarPatron(raiz, Patron);   
     auto end = std::chrono::steady_clock::now();
+    
     //show the elapsed time
     cout << "SuffixTree: elapsed time in milliseconds: "
         << chrono::duration_cast<chrono::microseconds>(end - start).count()
