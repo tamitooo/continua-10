@@ -18,18 +18,19 @@ struct Nodo {
 };
 
 Nodo* construirArbol(string texto) {
-    Nodo* raiz= new Nodo('/');
+    Nodo* raiz =new Nodo('/');
     int n = texto.size();
-    for (int i = 0; i<n; ++i) {
+    for (int i =0; i< n; ++i) {
         Nodo* nodo = raiz;
-        for (int j = i; j < n; ++j) {
-            int index =texto[j] - 'a';
-            if (nodo->hijos[index]== nullptr){
-                nodo->hijos[index]=new Nodo(texto[j]);
-            }
+        for (int j=i; j <n; ++j) {
+            char c = texto[j];
+            if (c <'a' || c > 'z') continue;
+            int index = c - 'a';
+            if (nodo->hijos[index] == nullptr)
+                nodo->hijos[index]= new Nodo(c);
             nodo = nodo->hijos[index];
         }
-        nodo->esHoja = true;
+        nodo->esHoja =true;
         nodo->posicion = i;
     }
     return raiz;
@@ -45,15 +46,17 @@ void bajarPorRamas(Nodo* nodo, vector<int>& posiciones) {
 }
 
 vector<int> buscarPatron(Nodo* raiz, string patron) {
+    Nodo* nodo = raiz;
     int m =patron.size();
-    Nodo* nodo=raiz;
-    for (int i=0; i < m; ++i) {
-        int index=patron[i] -'a';
-        if (nodo->hijos[index] == nullptr)
+    for (int i=0; i< m;++i) {
+        char c =patron[i];
+        if (c <'a' || c > 'z') return {};
+        int index = c - 'a';
+        if (nodo->hijos[index]== nullptr)
             return {};
-        nodo =nodo->hijos[index];
+        nodo= nodo->hijos[index];
     }
-    vector<int>posiciones;
+    vector<int> posiciones;
     bajarPorRamas(nodo, posiciones);
     return posiciones;
 }

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const string alfabeto = "abcdefghijklmnopqrstuvwxyz";  // solo letras minúsculas
+const string alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";  // solo letras minúsculas
 
 
 string generarTexto(size_t N){    
@@ -69,7 +69,7 @@ void verificarResultado(vector<int> result1, vector<int> result2)
 int main()
 {    
     srand(time(NULL));    
-    size_t N = 100000;//100,1000,10000,100000,1000000
+    size_t N = 1000;//100,1000,10000,100000,1000000
     int m = 10;
     string Texto = generarTexto(N);
     string Patron = generarTexto(m);    
