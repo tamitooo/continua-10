@@ -26,8 +26,9 @@ Nodo* construirArbol(string texto) {
             char c = texto[j];
             if (c <'a' || c > 'z') continue;
             int index = c - 'a';
-            if (nodo->hijos[index] == nullptr)
+            if (nodo->hijos[index] == nullptr){
                 nodo->hijos[index]= new Nodo(c);
+            }
             nodo = nodo->hijos[index];
         }
         nodo->esHoja =true;
@@ -38,11 +39,14 @@ Nodo* construirArbol(string texto) {
 
 void bajarPorRamas(Nodo* nodo, vector<int>& posiciones) {
     if (nodo ==nullptr)return;
-    if (nodo->esHoja)
+    if (nodo->esHoja){
         posiciones.push_back(nodo->posicion);
-    for (int i = 0; i < E; ++i)
-        if (nodo->hijos[i])
+    }
+    for (int i = 0; i < E; ++i){
+        if (nodo->hijos[i]){
             bajarPorRamas(nodo->hijos[i], posiciones);
+        }
+    }
 }
 
 vector<int> buscarPatron(Nodo* raiz, string patron) {
@@ -52,8 +56,9 @@ vector<int> buscarPatron(Nodo* raiz, string patron) {
         char c =patron[i];
         if (c <'a' || c > 'z') return {};
         int index = c - 'a';
-        if (nodo->hijos[index]== nullptr)
+        if (nodo->hijos[index]== nullptr){
             return {};
+        }
         nodo= nodo->hijos[index];
     }
     vector<int> posiciones;
