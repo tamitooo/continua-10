@@ -7,7 +7,8 @@
 
 using namespace std;
 
-const string alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789   ";
+const string alfabeto = "abcdefghijklmnopqrstuvwxyz";  // solo letras minúsculas
+
 
 string generarTexto(size_t N){    
     string resultado = "";
@@ -68,14 +69,16 @@ void verificarResultado(vector<int> result1, vector<int> result2)
 int main()
 {    
     srand(time(NULL));    
-    size_t N = 100;//100,1000,10000,100000,1000000
+    size_t N = 100000;//100,1000,10000,100000,1000000
     int m = 10;
     string Texto = generarTexto(N);
     string Patron = generarTexto(m);    
     
     vector<int> result1 = testInocente(Texto, Patron);
     vector<int> result2 = testBoyerMoore(Texto, Patron);
+    vector<int> result3 = testSuffixTree(Texto, Patron);
     verificarResultado(result1, result2);
+    verificarResultado(result1, result3);
 
     return 0;
 }
